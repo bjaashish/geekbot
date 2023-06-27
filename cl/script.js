@@ -85,7 +85,7 @@ const handleSubmit = async (e) => {
 
     // messageDiv.innerHTML = "..."
     loader(messageDiv)
-
+    // https://qbot-dodd.onrender.com/
     const response = await fetch('https://qbot-dodd.onrender.com/', {
         method: 'POST',
         headers: {
