@@ -31,6 +31,7 @@ function typeText(element, text) {
             clearInterval(interval)
         }
     }, 20)
+    // element.scrollTop=element.scrollHeight;
 }
 
 // generate unique ID for each message div of bot
@@ -65,7 +66,12 @@ function chatStripe(isAi, value, uniqueId) {
 const handleSubmit = async (e) => {
     e.preventDefault()
 
+    // form.querySelector('button').disabled = true;
+
+
     const data = new FormData(form)
+
+
 
     // user's chatstripe
     chatContainer.innerHTML += chatStripe(false, data.get('prompt'))
@@ -86,7 +92,7 @@ const handleSubmit = async (e) => {
     // messageDiv.innerHTML = "..."
     loader(messageDiv)
     // https://qbot-dodd.onrender.com/
-    const response = await fetch('https://qbot-dodd.onrender.com/', {
+    const response = await fetch('http://localhost:5000/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -102,8 +108,9 @@ const handleSubmit = async (e) => {
     if (response.ok) {
         const data = await response.json();
         const parsedData = data.bot.trim() // trims any trailing spaces/'\n' 
-
         typeText(messageDiv, parsedData)
+
+        // form.querySelector('button').disabled = false;
     } else {
         const err = await response.text()
 
